@@ -1,16 +1,19 @@
+import os
 import json
 import tweepy
+from Classes.AuthTwitter import AuthTwitter
+from Classes.StreamListener import StreamListener
 
 # Load credentials from json file
-with open("creds.json", "r") as file:
+
+path = os.path.abspath('creds.json')
+with open(path, "r") as file:
     creds = json.load(file)
 
-# Authenticate to Twitter
-auth = tweepy.OAuthHandler(creds['CONSUMER_API_KEY'],creds['CONSUMER_API_KEY_SECRET'])
-auth.set_access_token(creds['ACCESS_TOKEN'], creds['ACCESS_TOKEN_SECRET'])
+# Get access to api
+api = AuthTwitter(creds).get_api_instance()
 
-# Create API object
-api = tweepy.API(auth)
-
-# Create a tweet
-api.update_status("Vayase señor cuesta, vayase!!")
+# Create Listener using Stream API
+tweepy_listener = StreamListener()
+tweepy_stream = tweepy.Stream(auth=api.auth, listener=tweepy_listener)
+tweepy_stream.filter(track=['@VbotAnhq'])
