@@ -22,8 +22,8 @@ class MonitorListener(tweepy.StreamListener):
 
         if MonitorListener.from_creator(data,self.target_id):
             print(data)
-            path = os.path.abspath('../Library/status_target.json')
-            with open(path, "r") as file:
+            path = os.path.abspath('Library/status_target.json')
+            with open(path, "w") as file:
                 print(data, file=file)
                 print('\n',file=file)
 
