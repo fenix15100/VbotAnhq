@@ -21,6 +21,8 @@ def run_bot():
     mention_stream.filter(track=['@VbotAnhq'] ,is_async=True)
 
     # Create Listener for catch al videos from @EscenasANHQV ID 4711825403
-    monitor_listener = MonitorListener(api)
+    target_id = '4711825403'
+    monitor_listener = MonitorListener(api,target_id=target_id)
     monitor_stream = tweepy.Stream(auth=api.auth, listener=monitor_listener)
-    monitor_stream.filter(follow=['4711825403'], is_async=True)
+    monitor_stream.filter(follow=[target_id], is_async=True)
+

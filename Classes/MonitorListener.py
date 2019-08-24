@@ -1,34 +1,31 @@
+import os
 import tweepy
 import json
 
 
 class MonitorListener(tweepy.StreamListener):
 
-    def __init__(self, api):
+    def __init__(self, api=None,target_id='4711825403'):
         super().__init__()
         self.api = api
+        self.target_id = target_id
 
     @staticmethod
-    def from_creator(status):
-        try:
-            if hasattr(status, 'retweeted_status'):
-                return False
-            elif status.in_reply_to_status_id != None:
-                return False
-            elif status.in_reply_to_screen_name != None:
-                return False
-            elif status.in_reply_to_user_id != None:
-                return False
-            else:
-                return True
-        except Exception as error:
+    def from_creator(status,target_id):
+        if status['user']['id_str'] == target_id:
+            return True
+        else:
             return False
 
     def on_data(self, status):
         data = json.loads(status)
-        print(data)
-        if MonitorListener.from_creator(data):
+
+        if MonitorListener.from_creator(data,self.target_id):
             print(data)
+            path = os.path.abspath('../Library/status_target.json')
+            with open(path, "r") as file:
+                print(data, file=file)
+                print('\n',file=file)
 
     def on_error(self, status_code):
         # code to run each time an error is received
