@@ -108,3 +108,6 @@ creds.json
 
 #Jetbrians IDE
 .idea
+
+#Videos
+.Library/
