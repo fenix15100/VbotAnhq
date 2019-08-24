@@ -3,6 +3,7 @@ import json
 import tweepy
 from AuthTwitter import AuthTwitter
 from MentionListener import MentionListener
+from MonitorListener import MonitorListener
 
 
 def run_bot():
@@ -17,7 +18,13 @@ def run_bot():
     # Create Listener using Stream API for detects interations with bot
     mention_listener = MentionListener(api)
     mention_stream = tweepy.Stream(auth=api.auth, listener=mention_listener)
-    mention_stream.filter(track=['@VbotAnhq'])
+    mention_stream.filter(track=['@VbotAnhq'],is_async=True)
+
+    #Create Listener for catch al videos from @EscenasANHQV ID 4711825403
+
+    monitor_listener = MonitorListener(api)
+    monitor_stream = tweepy.Stream(auth=api.auth, listener=monitor_listener)
+    monitor_stream.filter(follow=['4711825403'], is_async=True)
 
 
 
