@@ -105,3 +105,6 @@ venv.bak/
 
 #Tokens twitter API
 creds.json
+
+#Jetbrians IDE
+.idea
