@@ -2,7 +2,7 @@ import tweepy
 import json
 
 
-class StreamListener(tweepy.StreamListener):
+class MentionListener(tweepy.StreamListener):
 
     def __init__(self, api):
         super().__init__()

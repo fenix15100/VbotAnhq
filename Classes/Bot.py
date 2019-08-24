@@ -2,7 +2,7 @@ import os
 import json
 import tweepy
 from AuthTwitter import AuthTwitter
-from StreamListener import StreamListener
+from MentionListener import MentionListener
 
 
 def run_bot():
@@ -14,7 +14,10 @@ def run_bot():
     # Get access to api
     api = AuthTwitter(creds).get_api_instance()
 
-    # Create Listener using Stream API
-    tweepy_listener = StreamListener(api)
-    tweepy_stream = tweepy.Stream(auth=api.auth, listener=tweepy_listener)
-    tweepy_stream.filter(track=['@VbotAnhq'])
+    # Create Listener using Stream API for detects interations with bot
+    mention_listener = MentionListener(api)
+    mention_stream = tweepy.Stream(auth=api.auth, listener=mention_listener)
+    mention_stream.filter(track=['@VbotAnhq'])
+
+
+
