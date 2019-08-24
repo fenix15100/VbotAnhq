@@ -8,13 +8,6 @@ class MentionListener(tweepy.StreamListener):
         super().__init__()
         self.api = api
 
-    def on_status(self, status):
-        # code to run each time the stream receives a status
-        print(status)
-
-    def on_direct_message(self, status):
-        # code to run each time the stream receives a direct message
-        print(status)
 
     def on_data(self, status):
         data = json.loads(status)

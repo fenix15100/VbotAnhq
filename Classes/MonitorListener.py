@@ -8,17 +8,27 @@ class MonitorListener(tweepy.StreamListener):
         super().__init__()
         self.api = api
 
-    def on_status(self, status):
-        # code to run each time the stream receives a status
-        print(status)
-
-    def on_direct_message(self, status):
-        # code to run each time the stream receives a direct message
-        print(status)
+    @staticmethod
+    def from_creator(status):
+        try:
+            if hasattr(status, 'retweeted_status'):
+                return False
+            elif status.in_reply_to_status_id != None:
+                return False
+            elif status.in_reply_to_screen_name != None:
+                return False
+            elif status.in_reply_to_user_id != None:
+                return False
+            else:
+                return True
+        except Exception as error:
+            return False
 
     def on_data(self, status):
         data = json.loads(status)
         print(data)
+        if MonitorListener.from_creator(data):
+            print(data)
 
     def on_error(self, status_code):
         # code to run each time an error is received
