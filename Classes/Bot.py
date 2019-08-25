@@ -1,9 +1,9 @@
 import os
 import json
 import tweepy
-from AuthTwitter import AuthTwitter
-from MentionListener import MentionListener
-from MonitorListener import MonitorListener
+from Classes.AuthTwitter import AuthTwitter
+from Classes.MentionListener import MentionListener
+from Classes.MonitorListener import MonitorListener
 
 
 def run_bot():

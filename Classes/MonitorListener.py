@@ -12,7 +12,7 @@ class MonitorListener(tweepy.StreamListener):
 
     @staticmethod
     def from_creator(status,target_id):
-        if status['user']['id_str'] == target_id:
+        if hasattr(status,'user') and status['user']['id_str'] == target_id:
             return True
         else:
             return False
