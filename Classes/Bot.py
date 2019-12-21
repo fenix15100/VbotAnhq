@@ -5,7 +5,7 @@ from Classes.AuthTwitter import AuthTwitter
 from Classes.MentionListener import MentionListener
 from Classes.MonitorListener import MonitorListener
 
-
+# TODO hacerlo una clase pasando config
 def run_bot():
     # Load credentials from json file
     path = os.path.abspath('creds.json')
